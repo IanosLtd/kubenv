@@ -12,12 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package main
+package cmd
 
-import "github.com/ianoslabs/kubenv/cmd"
+import (
+	"fmt"
 
-var version = "undefined"
+	"github.com/spf13/cobra"
+)
 
-func main() {
-	cmd.Execute(version)
+// versionCmd represents the version command
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Print version information",
+	Long: ``,
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("kubenv version " + version)
+	},
+}
+
+func init() {
+	rootCmd.AddCommand(versionCmd)
 }
