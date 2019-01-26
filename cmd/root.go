@@ -31,7 +31,7 @@ var (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "kubenv",
-	Short: "Kubenv manages application stacks running on Kubernetes",
+	Short: "kubenv manages application stacks running on Kubernetes.",
 	Long: ``,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:

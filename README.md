@@ -1,6 +1,6 @@
-# Kubenv
+# kubenv
 
-Kubenv manages application stacks running on Kubernetes.
+kubenv manages application stacks running on Kubernetes.
 
 ## Overview
 
@@ -24,4 +24,4 @@ Kubenv manages application stacks running on Kubernetes.
 
 ## License
 
-Kubenv is licensed under the Apache License, Version 2.0.
+kubenv is licensed under the Apache License, Version 2.0.
