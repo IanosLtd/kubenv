@@ -33,9 +33,6 @@ var rootCmd = &cobra.Command{
 	Use:   "kubenv",
 	Short: "kubenv manages application stacks running on Kubernetes.",
 	Long: ``,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -44,7 +41,7 @@ func Execute(mainVersion string) {
 	version = mainVersion
 
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
+		// In case of error, set exit status to 1
 		os.Exit(1)
 	}
 }

@@ -15,10 +15,7 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
-        "github.com/spf13/viper"
 )
 
 // pullCmd represents the pull command
@@ -26,12 +23,8 @@ var pullCmd = &cobra.Command{
 	Use:   "pull",
 	Short: "Update local config",
 	Long: ``,
-	Run: func(cmd *cobra.Command, args []string) {
-		// Ensure correct kubectl binary version is installed if specified
-		if viper.IsSet("kubectl_version") {
-			fmt.Println("--- Updating \"" + viper.GetString("kubectl_binary") + "\"")
-			kubectlCheckVersion(true)
-		}
+	RunE: func(cmd *cobra.Command, args []string) error {
+		return nil
 	},
 }
 

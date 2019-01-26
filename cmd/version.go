@@ -25,12 +25,14 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print version information",
 	Long: ``,
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		fmt.Println("kubenv version " + version)
-		if kubectlGetClientVersion() != "" {
+		if kubectlExists() {
 			// Print kubectl version, if installed
 			fmt.Println("kubectl version " + kubectlGetClientVersion())
 		}
+
+		return nil
 	},
 }
 
