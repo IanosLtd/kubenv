@@ -1,4 +1,4 @@
-// Copyright © 2019 Konstantinos Konstantinidis <kkonstan@ianos.co.uk>
+// Copyright © 2017 Konstantinos Konstantinidis <kkonstan@ianos.co.uk>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,22 +18,23 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+        "github.com/spf13/viper"
 )
 
-// versionCmd represents the version command
-var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Print version information",
+// pullCmd represents the pull command
+var pullCmd = &cobra.Command{
+	Use:   "pull",
+	Short: "Update local config",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("kubenv version " + version)
-		if kubectlGetClientVersion() != "" {
-			// Print kubectl version, if installed
-			fmt.Println("kubectl version " + kubectlGetClientVersion())
+		// Ensure correct kubectl binary version is installed if specified
+		if viper.IsSet("kubectl_version") {
+			fmt.Println("--- Updating \"" + viper.GetString("kubectl_binary") + "\"")
+			kubectlCheckVersion(true)
 		}
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(pullCmd)
 }
