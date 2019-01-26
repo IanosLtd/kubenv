@@ -1,4 +1,4 @@
-// Copyright © 2017 Konstantinos Konstantinidis <kkonstan@ianos.co.uk>
+// Copyright © 2019 Konstantinos Konstantinidis <kkonstan@ianos.co.uk>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
@@ -22,8 +24,9 @@ import (
 var pullCmd = &cobra.Command{
 	Use:   "pull",
 	Short: "Update local config",
-	Long: ``,
+	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		fmt.Println("pull called")
 		return nil
 	},
 }

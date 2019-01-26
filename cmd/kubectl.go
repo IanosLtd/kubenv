@@ -25,17 +25,21 @@ import (
 )
 
 // kubectlCommand
-// Run kubectl with specified arguments
-func kubectlCommand(cmdArgs []string) []byte {
+// Run kubectl with specified arguments, and abort if abortOnError is true on error
+func kubectlCommand(cmdArgs []string, abortOnError bool) string {
 	var (
 		cmdOut []byte
 		err    error
 	)
 	cmdName := viper.GetString("kubectl_binary")
 	if cmdOut, err = exec.Command(cmdName, cmdArgs...).CombinedOutput(); err != nil {
-		//fmt.Fprintln(os.Stderr, "There was an error running kubectl command: ", err)
+		if abortOnError {
+			// Print error and abort if abortOnError
+			fmt.Fprintln(os.Stderr, string(cmdOut))
+			os.Exit(1)
+		}
 	}
-	return cmdOut
+	return string(cmdOut)
 }
 
 // kubectlClusters
@@ -77,6 +81,24 @@ func kubectlClusters() map[string]string {
 	return clusters
 }
 
+// kubectl ParseEnvironment
+// parse an environment name and return a namespace and context
+func kubectlParseEnvironment(environment string) (namespace string, context string) {
+	var (
+		splitEnvironment []string
+	)
+
+	splitEnvironment = strings.Split(environment, ".")
+
+	namespace = splitEnvironment[0]
+	if len(splitEnvironment) == 1 {
+		context = viper.GetString("default_context")
+	} else {
+		context = strings.Split(environment, ".")[1]
+	}
+	return
+}
+
 // kubectlGetClientVersion
 // Return kubectl client version
 func kubectlGetClientVersion() string {
@@ -111,4 +133,5 @@ func kubectlExists() bool {
 
 func init() {
 	viper.SetDefault("kubectl_binary", "kubectl")
+	viper.SetDefault("default_context", "docker-for-desktop")
 }

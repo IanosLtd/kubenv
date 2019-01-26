@@ -15,26 +15,39 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/spf13/cobra"
 )
 
-// versionCmd represents the version command
-var versionCmd = &cobra.Command{
-	Use:   "version",
-	Short: "Print version information",
+// podsCmd represents the pods command
+var podsCmd = &cobra.Command{
+	Use:   "pods",
+	Short: "A brief description of your command",
 	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		fmt.Println("kubenv version " + version)
-		if kubectlExists() {
-			// Print kubectl version, if installed
-			fmt.Println("kubectl version " + kubectlGetClientVersion())
+		// Abort if number of arguments is incorrect with an apropriate error
+		if len(args) == 0 {
+			return errors.New("environment not specified")
 		}
+		if len(args) > 1 {
+			return errors.New("extra arguments")
+		}
+
+		// Parse namespace & context from environment name
+		namespace, context := kubectlParseEnvironment(args[0])
+
+		// Abort early if appropriate kubectl is not available
+		if !kubectlExists() {
+			return errors.New("kubectl missing")
+		}
+		fmt.Println(string(kubectlCommand([]string{"--context=" + context, "--namespace=" + namespace, "get", "pods", "-L", "version,timestamp,owner", "-o", "wide"}, true)))
+
 		return nil
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(podsCmd)
 }
