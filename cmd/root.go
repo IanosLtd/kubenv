@@ -35,7 +35,6 @@ var (
 var rootCmd = &cobra.Command{
 	Use:   "kubenv",
 	Short: "kubenv manages application stacks running on Kubernetes.",
-	Long:  ``,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -64,7 +63,7 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
-        viper.SetDefault("kubenv_config_path", "~/Git/kubenv-config")
+	viper.SetDefault("kubenv_config_path", "~/Git/kubenv-config")
 }
 
 // initConfig reads in config file and ENV variables if set.

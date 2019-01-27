@@ -24,9 +24,8 @@ import (
 
 // updateCmd represents the update command
 var updateCmd = &cobra.Command{
-	Use:   "update",
+	Use:   "update <environment>",
 	Short: "Update an environment",
-	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Abort if number of arguments is incorrect with an apropriate error
 		if len(args) == 0 {

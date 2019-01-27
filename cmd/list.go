@@ -27,7 +27,6 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List all environments",
-	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		if len(args) != 0 {
 			return errors.New("no arguments supported")

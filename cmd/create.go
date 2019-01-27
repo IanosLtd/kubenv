@@ -24,9 +24,8 @@ import (
 
 // createCmd represents the create command
 var createCmd = &cobra.Command{
-	Use:   "create",
+	Use:   "create <environment>",
 	Short: "Create an environment",
-	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Abort if number of arguments is incorrect with an apropriate error
 		if len(args) == 0 {

@@ -25,9 +25,8 @@ import (
 
 // deleteCmd represents the delete command
 var deleteCmd = &cobra.Command{
-	Use:   "delete",
+	Use:   "delete <environment>",
 	Short: "Delete an environment",
-	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Abort if number of arguments is incorrect with an apropriate error
 		if len(args) == 0 {

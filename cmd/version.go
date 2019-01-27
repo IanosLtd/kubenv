@@ -24,7 +24,6 @@ import (
 var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Print version information",
-	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		fmt.Println("kubenv version " + version)
 		if kubectlExists() {

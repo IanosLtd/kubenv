@@ -24,7 +24,6 @@ import (
 var pullCmd = &cobra.Command{
 	Use:   "pull",
 	Short: "Update local config",
-	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		fmt.Println("pull called")
 		return nil

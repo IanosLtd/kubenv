@@ -23,9 +23,8 @@ import (
 
 // podsCmd represents the pods command
 var podsCmd = &cobra.Command{
-	Use:   "pods",
+	Use:   "pods <environment>",
 	Short: "A brief description of your command",
-	Long:  ``,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		// Abort if number of arguments is incorrect with an apropriate error
 		if len(args) == 0 {
