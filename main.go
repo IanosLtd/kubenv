@@ -14,7 +14,7 @@
 
 package main
 
-import "github.com/ianoslabs/kubenv/cmd"
+import "github.com/ianos-ltd/kubenv/cmd"
 
 var version = "undefined"
 
